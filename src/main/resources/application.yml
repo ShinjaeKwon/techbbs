@@ -1,0 +1,42 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  main:
+    allow-circular-references: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/techbbs?serverTimezone=Asia/Seoul
+    username: sjk
+    password: sjk
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    show-sql: false
+    properties:
+      hibernate.format_sql: false
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: #trace
