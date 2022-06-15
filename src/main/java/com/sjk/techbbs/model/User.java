@@ -12,6 +12,8 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.sjk.techbbs.dto.UserJoinDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,11 +37,19 @@ public class User {
 	private String password;
 
 	@Column(nullable = false, length = 50, unique = true)
+	private String email;
 
+	@Column(length = 20, columnDefinition = "varchar(20) default 'USER'")
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
-	private RoleType role;
+	private RoleType role = RoleType.USER;
 
 	@CreationTimestamp
 	private Timestamp createDate;
 
+	public User(UserJoinDto userJoinDto) {
+		this.username = userJoinDto.getUsername();
+		this.password = userJoinDto.getPassword();
+		this.email = userJoinDto.getEmail();
+	}
 }
