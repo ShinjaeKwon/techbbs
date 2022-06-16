@@ -38,7 +38,7 @@ public class UserApiController {
 	}
 
 	@PostMapping("/api/withdrawal")
-	public ResponseEntity<String> delete(@RequestBody UserDto userDto) {
+	public ResponseEntity<String> withdrawal(@RequestBody UserDto userDto) {
 		userService.withdrawal(userDto);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Withdrawal", userDto.getUsername());
