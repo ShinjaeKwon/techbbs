@@ -19,7 +19,7 @@ public class UserApiController {
 
 	private final UserService userService;
 
-	@PostMapping("/api/join")
+	@PostMapping("/join")
 	public ResponseEntity<String> join(@RequestBody UserDto userDto) {
 		//TODO : Use Spring Security
 		userService.join(userDto);
@@ -28,7 +28,7 @@ public class UserApiController {
 		return new ResponseEntity<>("User Join", responseHeaders, HttpStatus.CREATED);
 	}
 
-	@PostMapping("/api/update/user")
+	@PostMapping("/user/update")
 	public ResponseEntity<String> update(@RequestBody UserDto userDto) {
 		User user = userService.update(userDto);
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -37,7 +37,7 @@ public class UserApiController {
 		return new ResponseEntity<>("Update User", responseHeaders, HttpStatus.OK);
 	}
 
-	@PostMapping("/api/withdrawal")
+	@PostMapping("/user/withdrawal")
 	public ResponseEntity<String> withdrawal(@RequestBody UserDto userDto) {
 		userService.withdrawal(userDto);
 		HttpHeaders responseHeaders = new HttpHeaders();

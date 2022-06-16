@@ -1,4 +1,4 @@
-package com.sjk.techbbs.controller.api;
+package com.sjk.techbbs.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sjk.techbbs.dto.UserDto;
 import com.sjk.techbbs.model.User;
 import com.sjk.techbbs.repository.UserRepository;
-import com.sjk.techbbs.service.UserService;
 
 @SpringBootTest
 @Transactional
@@ -23,7 +22,6 @@ class UserServiceTest {
 	private UserRepository userRepository;
 
 	@Test
-	@Transactional
 	void 회원가입() {
 		//given
 		UserDto userDto = new UserDto("test", "1234", "test@naver.com");
@@ -41,7 +39,6 @@ class UserServiceTest {
 	}
 
 	@Test
-	@Transactional
 	void 회원수정() {
 		//given
 		User user = userRepository.findByUsername("sjk6437").get();
@@ -53,7 +50,6 @@ class UserServiceTest {
 	}
 
 	@Test
-	@Transactional
 	void 회원탈퇴() {
 		//given
 		UserDto userDto = new UserDto("test", "test123", "test@naver.com");

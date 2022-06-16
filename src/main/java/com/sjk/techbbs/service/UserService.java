@@ -23,17 +23,21 @@ public class UserService {
 
 	@Transactional
 	public User update(UserDto userDto) {
-		User user = userRepository.findByUsername(userDto.getUsername())
-			.orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
+		User user = findByUsername(userDto.getUsername());
 		user.update(userDto.getPassword());
 		return user;
 	}
 
 	@Transactional
 	public void withdrawal(UserDto userDto) {
-		User user = userRepository.findByUsername(userDto.getUsername())
-			.orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
+		User user = findByUsername(userDto.getUsername());
 		userRepository.delete(user);
+	}
+
+	@Transactional(readOnly = true)
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username)
+			.orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
 	}
 
 }
