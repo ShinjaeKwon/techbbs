@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.sjk.techbbs.dto.UserJoinDto;
+import com.sjk.techbbs.dto.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,17 +39,20 @@ public class User {
 	@Column(nullable = false, length = 50, unique = true)
 	private String email;
 
-	@Column(length = 20, columnDefinition = "varchar(20) default 'USER'")
-	@Builder.Default
 	@Enumerated(EnumType.STRING)
-	private RoleType role = RoleType.USER;
+	private RoleType role;
 
 	@CreationTimestamp
 	private Timestamp createDate;
 
-	public User(UserJoinDto userJoinDto) {
-		this.username = userJoinDto.getUsername();
-		this.password = userJoinDto.getPassword();
-		this.email = userJoinDto.getEmail();
+	public User(UserDto userDto) {
+		this.username = userDto.getUsername();
+		this.password = userDto.getPassword();
+		this.email = userDto.getEmail();
+		this.role = RoleType.USER;
+	}
+
+	public void update(String newPassword) {
+		this.password = newPassword;
 	}
 }

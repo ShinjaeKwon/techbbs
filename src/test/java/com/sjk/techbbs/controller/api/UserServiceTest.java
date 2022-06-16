@@ -2,13 +2,12 @@ package com.sjk.techbbs.controller.api;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sjk.techbbs.dto.UserJoinDto;
+import com.sjk.techbbs.dto.UserDto;
 import com.sjk.techbbs.model.User;
 import com.sjk.techbbs.repository.UserRepository;
 import com.sjk.techbbs.service.UserService;
@@ -27,18 +26,29 @@ class UserServiceTest {
 	@Transactional
 	void 회원가입() {
 		//given
-		UserJoinDto userJoinDto = new UserJoinDto("base6666", "1234", "base6666@naver.com");
+		UserDto userDto = new UserDto("test", "1234", "test@naver.com");
 
 		//when
-		userService.join(userJoinDto);
+		userService.join(userDto);
 
 		//then
-		User findUser = userRepository.findByUsername(userJoinDto.getUsername())
+		User findUser = userRepository.findByUsername(userDto.getUsername())
 			.get();
 
-		assertEquals(userJoinDto.getUsername(), findUser.getUsername());
-		assertEquals(userJoinDto.getPassword(), findUser.getPassword());
-		assertEquals(userJoinDto.getEmail(), findUser.getEmail());
+		assertEquals(userDto.getUsername(), findUser.getUsername());
+		assertEquals(userDto.getPassword(), findUser.getPassword());
+		assertEquals(userDto.getEmail(), findUser.getEmail());
+	}
 
+	@Test
+	@Transactional
+	void 회원수정() {
+		//given
+		User user = userRepository.findByUsername("sjk6437").get();
+		//when
+		String newPassword = "1234";
+		user.update(newPassword);
+		//then
+		assertEquals(user.getPassword(), newPassword);
 	}
 }
