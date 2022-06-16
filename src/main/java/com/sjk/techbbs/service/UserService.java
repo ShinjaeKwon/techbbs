@@ -28,4 +28,12 @@ public class UserService {
 		user.update(userDto.getPassword());
 		return user;
 	}
+
+	@Transactional
+	public void withdrawal(UserDto userDto) {
+		User user = userRepository.findByUsername(userDto.getUsername())
+			.orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
+		userRepository.delete(user);
+	}
+
 }

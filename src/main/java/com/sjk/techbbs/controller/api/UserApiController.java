@@ -37,4 +37,11 @@ public class UserApiController {
 		return new ResponseEntity<>("Update User", responseHeaders, HttpStatus.OK);
 	}
 
+	@PostMapping("/api/withdrawal")
+	public ResponseEntity<String> delete(@RequestBody UserDto userDto) {
+		userService.withdrawal(userDto);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Withdrawal", userDto.getUsername());
+		return new ResponseEntity<>("Delete User", responseHeaders, HttpStatus.OK);
+	}
 }

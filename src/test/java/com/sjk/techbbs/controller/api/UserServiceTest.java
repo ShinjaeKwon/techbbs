@@ -51,4 +51,17 @@ class UserServiceTest {
 		//then
 		assertEquals(user.getPassword(), newPassword);
 	}
+
+	@Test
+	@Transactional
+	void 회원탈퇴() {
+		//given
+		UserDto userDto = new UserDto("test", "test123", "test@naver.com");
+		userService.join(userDto);
+		//when
+		userService.withdrawal(userDto);
+		//then
+		assertTrue(userRepository.findByUsername(userDto.getUsername()).isEmpty());
+	}
+
 }
