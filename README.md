@@ -9,3 +9,4 @@
 
 ### 게시판 
 * 글쓰기 : /board/write
+* 글수정 : /board/update
