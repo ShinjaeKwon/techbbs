@@ -27,6 +27,7 @@ public class BoardService {
 
 	@Transactional
 	public void update(BoardUpdateDto boardUpdateDto) {
+		//TODO : Confirm User Validation from Board.user
 		Board board = boardRepository.findById(boardUpdateDto.getBoardId())
 			.orElseThrow(() -> new IllegalArgumentException("게시글 불러오기 실패"));
 		board.update(boardUpdateDto);
@@ -34,6 +35,7 @@ public class BoardService {
 
 	@Transactional
 	public void delete(Long boardId) {
+		//TODO : Confirm User Validation from Board.user
 		Board board = boardRepository.findById(boardId)
 			.orElseThrow(() -> new IllegalArgumentException("게시글 불러오기 실패"));
 		boardRepository.delete(board);
