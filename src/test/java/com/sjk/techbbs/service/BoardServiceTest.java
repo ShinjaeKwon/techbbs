@@ -43,8 +43,8 @@ class BoardServiceTest {
 
 	@Test
 	void 게시글_수정() {
-		BoardUpdateDto boardUpdateDto = new BoardUpdateDto(4L, "게시글 수정", "게시글 수정", "알고리즘");
 		//given
+		BoardUpdateDto boardUpdateDto = new BoardUpdateDto(4L, "게시글 수정", "게시글 수정", "알고리즘");
 		//when
 		boardService.update(boardUpdateDto);
 		//then
@@ -55,4 +55,5 @@ class BoardServiceTest {
 		assertEquals(user, findBoard.getUser());
 		assertEquals(boardUpdateDto.getCategory(), findBoard.getCategory().getSubject());
 	}
+
 }
