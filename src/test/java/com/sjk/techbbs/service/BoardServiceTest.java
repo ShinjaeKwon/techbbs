@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sjk.techbbs.dto.BoardDto;
+import com.sjk.techbbs.dto.BoardUpdateDto;
+import com.sjk.techbbs.dto.BoardWriteDto;
 import com.sjk.techbbs.model.Board;
 import com.sjk.techbbs.model.User;
 import com.sjk.techbbs.repository.BoardRepository;
@@ -28,30 +29,30 @@ class BoardServiceTest {
 	@Test
 	void 게시글_작성() {
 		//given
-		BoardDto boardDto = new BoardDto("게시글 테스트", "게시글 테스트입니다.", "sjk6437", "운영체제");
+		BoardWriteDto boardWriteDto = new BoardWriteDto("게시글 테스트", "게시글 테스트입니다.", "sjk6437", "운영체제");
 		//when
-		boardService.write(boardDto);
+		boardService.write(boardWriteDto);
 		//then
-		Board findBoard = boardRepository.findByTitle(boardDto.getTitle()).get();
+		Board findBoard = boardRepository.findByTitle(boardWriteDto.getTitle()).get();
 		User user = userService.findByUsername("sjk6437");
-		assertEquals(boardDto.getTitle(), findBoard.getTitle());
-		assertEquals(boardDto.getContent(), findBoard.getContent());
+		assertEquals(boardWriteDto.getTitle(), findBoard.getTitle());
+		assertEquals(boardWriteDto.getContent(), findBoard.getContent());
 		assertEquals(user, findBoard.getUser());
-		assertEquals(boardDto.getCategory(), findBoard.getCategory().getSubject());
+		assertEquals(boardWriteDto.getCategory(), findBoard.getCategory().getSubject());
 	}
 
 	@Test
 	void 게시글_수정() {
-		BoardDto boardDto = new BoardDto("게시글 수정", "게시글 수정", "sjk6437", "알고리즘");
+		BoardUpdateDto boardUpdateDto = new BoardUpdateDto(4L, "게시글 수정", "게시글 수정", "알고리즘");
 		//given
 		//when
-		boardService.update(4L, boardDto);
+		boardService.update(boardUpdateDto);
 		//then
 		Board findBoard = boardRepository.findById(4L).get();
 		User user = userService.findByUsername("sjk6437");
-		assertEquals(boardDto.getTitle(), findBoard.getTitle());
-		assertEquals(boardDto.getContent(), findBoard.getContent());
+		assertEquals(boardUpdateDto.getTitle(), findBoard.getTitle());
+		assertEquals(boardUpdateDto.getContent(), findBoard.getContent());
 		assertEquals(user, findBoard.getUser());
-		assertEquals(boardDto.getCategory(), findBoard.getCategory().getSubject());
+		assertEquals(boardUpdateDto.getCategory(), findBoard.getCategory().getSubject());
 	}
 }
