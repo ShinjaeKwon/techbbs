@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sjk.techbbs.dto.BoardDto;
+import com.sjk.techbbs.dto.BoardUpdateDto;
+import com.sjk.techbbs.dto.BoardWriteDto;
 import com.sjk.techbbs.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,20 @@ public class BoardApiController {
 	private final BoardService boardService;
 
 	@PostMapping("/board/write")
-	public ResponseEntity<String> write(@RequestBody BoardDto boardDto) {
-		boardService.write(boardDto);
+	public ResponseEntity<String> write(@RequestBody BoardWriteDto boardWriteDto) {
+		boardService.write(boardWriteDto);
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Write Board", boardDto.getTitle());
-		return new ResponseEntity<>("Write User : " + boardDto.getUsername(), responseHeaders, HttpStatus.CREATED);
+		responseHeaders.set("Write Board", boardWriteDto.getTitle());
+		return new ResponseEntity<>("Write User : " + boardWriteDto.getUsername(), responseHeaders, HttpStatus.CREATED);
+	}
+
+	@PostMapping("/board/update")
+	public ResponseEntity<String> update(@RequestBody BoardUpdateDto boardUpdateDto) {
+		boardService.update(boardUpdateDto);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Update Board", boardUpdateDto.getTitle());
+		return new ResponseEntity<>("Update BoardId : " + boardUpdateDto.getBoardId(), responseHeaders, HttpStatus.OK);
+
 	}
 
 }

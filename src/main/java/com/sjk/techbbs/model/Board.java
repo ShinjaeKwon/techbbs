@@ -19,7 +19,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sjk.techbbs.dto.BoardDto;
+import com.sjk.techbbs.dto.BoardUpdateDto;
+import com.sjk.techbbs.dto.BoardWriteDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,10 +59,16 @@ public class Board {
 	@CreationTimestamp
 	private Timestamp createDate;
 
-	public Board(BoardDto boardDto, User user) {
-		this.title = boardDto.getTitle();
-		this.content = boardDto.getContent();
+	public Board(BoardWriteDto boardWriteDto, User user) {
+		this.title = boardWriteDto.getTitle();
+		this.content = boardWriteDto.getContent();
 		this.user = user;
-		this.category = Category.findByCategoryName(boardDto.getCategory());
+		this.category = Category.findByCategoryName(boardWriteDto.getCategory());
+	}
+
+	public void update(BoardUpdateDto boardUpdateDto) {
+		this.title = boardUpdateDto.getTitle();
+		this.content = boardUpdateDto.getContent();
+		this.category = Category.findByCategoryName(boardUpdateDto.getCategory());
 	}
 }
