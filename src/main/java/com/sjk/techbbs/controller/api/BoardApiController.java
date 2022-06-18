@@ -1,5 +1,7 @@
 package com.sjk.techbbs.controller.api;
 
+import java.util.Map;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,14 @@ public class BoardApiController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Update Board", boardUpdateDto.getTitle());
 		return new ResponseEntity<>("Update BoardId : " + boardUpdateDto.getBoardId(), responseHeaders, HttpStatus.OK);
+	}
 
+	@PostMapping("/board/delete")
+	public ResponseEntity<String> delete(@RequestBody Map<String, String> map) {
+		boardService.delete(Long.parseLong(map.get("boardId")));
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Delete Board", map.get("boardId"));
+		return new ResponseEntity<>("Delete BoardId : " + map.get("boardId"), responseHeaders, HttpStatus.OK);
 	}
 
 }

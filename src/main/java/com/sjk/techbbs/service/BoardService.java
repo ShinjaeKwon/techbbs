@@ -31,4 +31,11 @@ public class BoardService {
 			.orElseThrow(() -> new IllegalArgumentException("게시글 불러오기 실패"));
 		board.update(boardUpdateDto);
 	}
+
+	@Transactional
+	public void delete(Long boardId) {
+		Board board = boardRepository.findById(boardId)
+			.orElseThrow(() -> new IllegalArgumentException("게시글 불러오기 실패"));
+		boardRepository.delete(board);
+	}
 }
