@@ -7,7 +7,11 @@ public enum Category {
 	NETWORK("네트워크"),
 	ALGORITHM("알고리즘"),
 	DATABASE("데이터베이스"),
-	DESIGN_PATTERN("디자인패턴"), DATA_CONSTRUCTOR("자료구조"), JAVA("자바"), SPRING("스프링"), JPA("JPA");
+	DESIGN_PATTERN("디자인패턴"),
+	DATA_CONSTRUCTOR("자료구조"),
+	JAVA("자바"),
+	SPRING("스프링"),
+	JPA("JPA");
 
 	private final String subject;
 
@@ -17,8 +21,8 @@ public enum Category {
 
 	public static Category findByCategoryName(String category) {
 		return Arrays.stream(Category.values())
-			.findFirst()
 			.filter(s -> s.subject.equals(category))
+			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("카테고리를 찾을 수 없습니다."));
 	}
 

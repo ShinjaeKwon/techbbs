@@ -39,4 +39,19 @@ class BoardServiceTest {
 		assertEquals(user, findBoard.getUser());
 		assertEquals(boardDto.getCategory(), findBoard.getCategory().getSubject());
 	}
+
+	@Test
+	void 게시글_수정() {
+		BoardDto boardDto = new BoardDto("게시글 수정", "게시글 수정", "sjk6437", "알고리즘");
+		//given
+		//when
+		boardService.update(4L, boardDto);
+		//then
+		Board findBoard = boardRepository.findById(4L).get();
+		User user = userService.findByUsername("sjk6437");
+		assertEquals(boardDto.getTitle(), findBoard.getTitle());
+		assertEquals(boardDto.getContent(), findBoard.getContent());
+		assertEquals(user, findBoard.getUser());
+		assertEquals(boardDto.getCategory(), findBoard.getCategory().getSubject());
+	}
 }
