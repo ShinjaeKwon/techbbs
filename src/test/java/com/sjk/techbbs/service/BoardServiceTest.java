@@ -56,4 +56,14 @@ class BoardServiceTest {
 		assertEquals(boardUpdateDto.getCategory(), findBoard.getCategory().getSubject());
 	}
 
+	@Test
+	void 게시글_삭제() {
+		//given
+		Long boardId = 4L;
+		//when
+		boardService.delete(boardId);
+		//then
+		assertTrue(boardRepository.findById(boardId).isEmpty());
+	}
+	
 }
