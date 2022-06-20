@@ -49,8 +49,7 @@ public class Board {
 	@ManyToOne
 	private User user;
 
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties({"board"})
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Reply> replies;
 
 	@Enumerated(EnumType.STRING)
