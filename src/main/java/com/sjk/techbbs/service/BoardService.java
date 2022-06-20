@@ -1,7 +1,7 @@
 package com.sjk.techbbs.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +44,7 @@ public class BoardService {
 	}
 
 	@Transactional
-	public List<Board> searchByTitle(String title) {
-		return boardRepository.findAllByTitleContaining(title);
+	public Page<Board> searchByTitle(String title, Pageable pageable) {
+		return boardRepository.findAllByTitleContaining(title, pageable);
 	}
 }
