@@ -2,6 +2,8 @@ package com.sjk.techbbs.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -64,6 +66,19 @@ class BoardServiceTest {
 		boardService.delete(boardId);
 		//then
 		assertTrue(boardRepository.findById(boardId).isEmpty());
+	}
+
+	@Test
+	void 게시글_키워드_검색() {
+		//given
+		BoardWriteDto boardWriteDto = new BoardWriteDto("테스트 테스트", "게시글 테스트입니다.", "sjk6437", "운영체제");
+		boardService.write(boardWriteDto);
+		//when
+		List<Board> findBoards = boardService.searchByTitle(boardWriteDto.getTitle());
+		//then
+		for (Board findBoard : findBoards) {
+			assertTrue(findBoard.getTitle().contains(boardWriteDto.getTitle()));
+		}
 	}
 	
 }
