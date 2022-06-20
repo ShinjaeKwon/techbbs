@@ -1,5 +1,7 @@
 package com.sjk.techbbs.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,5 +41,10 @@ public class BoardService {
 		Board board = boardRepository.findById(boardId)
 			.orElseThrow(() -> new IllegalArgumentException("게시글 불러오기 실패"));
 		boardRepository.delete(board);
+	}
+
+	@Transactional
+	public List<Board> searchByTitle(String title) {
+		return boardRepository.findAllByTitleContaining(title);
 	}
 }
