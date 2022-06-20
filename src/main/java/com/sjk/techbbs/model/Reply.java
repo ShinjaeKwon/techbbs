@@ -31,9 +31,6 @@ public class Reply {
 	private String content;
 
 	@ManyToOne
-	private Board board;
-
-	@ManyToOne
 	private User user;
 
 	@CreationTimestamp
