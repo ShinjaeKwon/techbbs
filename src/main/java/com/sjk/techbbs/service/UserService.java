@@ -40,4 +40,9 @@ public class UserService {
 			.orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
 	}
 
+	@Transactional(readOnly = true)
+	public User findById(Long userId) {
+		return userRepository.findById(userId)
+			.orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
+	}
 }

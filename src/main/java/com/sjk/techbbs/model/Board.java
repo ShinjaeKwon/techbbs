@@ -69,4 +69,8 @@ public class Board {
 		this.content = boardUpdateDto.getContent();
 		this.category = Category.findByCategoryName(boardUpdateDto.getCategory());
 	}
+
+	public void addReply(Reply reply) {
+		this.replies.add(reply);
+	}
 }

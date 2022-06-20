@@ -35,4 +35,9 @@ public class Reply {
 
 	@CreationTimestamp
 	private Timestamp createDate;
+
+	public Reply(String content, User user) {
+		this.content = content;
+		this.user = user;
+	}
 }

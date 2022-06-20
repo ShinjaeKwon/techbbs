@@ -47,4 +47,10 @@ public class BoardService {
 	public Page<Board> searchByTitle(String title, Pageable pageable) {
 		return boardRepository.findAllByTitleContaining(title, pageable);
 	}
+
+	@Transactional
+	public Board findById(Long boardId) {
+		return boardRepository.findById(boardId)
+			.orElseThrow(() -> new IllegalArgumentException("게시글 불러오기 실패"));
+	}
 }
