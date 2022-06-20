@@ -33,11 +33,15 @@ public class Reply {
 	@ManyToOne
 	private User user;
 
+	@ManyToOne
+	private Board board;
+
 	@CreationTimestamp
 	private Timestamp createDate;
 
-	public Reply(String content, User user) {
+	public Reply(String content, User user, Board board) {
 		this.content = content;
 		this.user = user;
+		this.board = board;
 	}
 }

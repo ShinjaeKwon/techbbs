@@ -23,7 +23,7 @@ public class ReplyService {
 	public void write(ReplyWriteDto replyWriteDto) {
 		Board board = boardService.findById(replyWriteDto.getBoardId());
 		User user = userService.findById(replyWriteDto.getUserId());
-		Reply reply = new Reply(replyWriteDto.getContent(), user);
+		Reply reply = new Reply(replyWriteDto.getContent(), user, board);
 		board.addReply(reply);
 		replyRepository.save(reply);
 	}
