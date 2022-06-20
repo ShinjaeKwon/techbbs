@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sjk.techbbs.dto.BoardUpdateDto;
 import com.sjk.techbbs.dto.BoardWriteDto;
 
