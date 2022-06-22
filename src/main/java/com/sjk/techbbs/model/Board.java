@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sjk.techbbs.dto.BoardUpdateDto;
 import com.sjk.techbbs.dto.BoardWriteDto;
 
@@ -50,7 +50,7 @@ public class Board {
 	private User user;
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties({"board"})
+	@JsonManagedReference
 	private List<Reply> replies;
 
 	@Enumerated(EnumType.STRING)

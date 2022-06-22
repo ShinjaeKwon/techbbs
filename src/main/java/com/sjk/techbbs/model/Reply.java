@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +36,7 @@ public class Reply {
 	private User user;
 
 	@ManyToOne
+	@JsonBackReference
 	private Board board;
 
 	@CreationTimestamp
