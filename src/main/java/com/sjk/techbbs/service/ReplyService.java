@@ -27,4 +27,10 @@ public class ReplyService {
 		board.addReply(reply);
 		replyRepository.save(reply);
 	}
+
+	@Transactional
+	public void delete(Long replyId) {
+		//TODO : Confirm User Validation from Reply
+		replyRepository.deleteById(replyId);
+	}
 }
